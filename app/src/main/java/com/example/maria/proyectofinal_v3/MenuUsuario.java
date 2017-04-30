@@ -25,11 +25,8 @@ public class MenuUsuario extends AppCompatActivity {
     //cada uno de estos métodos (imagebutton) lanza la actividad CategoriaUsuario
 
     public void fontanero(View v){
-
         Intent intent=new Intent(this, CategoriaUsuario.class);
+        intent.putExtra("categoria","fontanero");
         startActivity(intent);
-
-
-
     }
 }

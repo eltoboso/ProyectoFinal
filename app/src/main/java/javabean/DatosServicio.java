@@ -5,29 +5,27 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-/**
- * Created by Maria on 28/4/17.
- */
-
 public class DatosServicio implements Serializable {
 
 
     private boolean activo;
-    private int telefono;
+    private int telf;
     private String categoria, fecha;
     private int dni;
-    private String direccion;
+    private String nombre, direccion;
     private double puntuacion;
 
-    public DatosServicio(boolean activo, int telefono,
-                         String categoria, String fecha, int dni,
+    public DatosServicio(boolean activo, int telf, String categoria,
+                         String fecha, int dni, String nombre,
                          String direccion, double puntuacion) {
         super();
         this.activo = activo;
-        this.telefono = telefono;
+        this.telf = telf;
         this.categoria = categoria;
         this.fecha = fecha;
         this.dni = dni;
+        this.nombre = nombre;
+
         this.direccion = direccion;
         this.puntuacion = puntuacion;
     }
@@ -35,8 +33,8 @@ public class DatosServicio implements Serializable {
         return activo;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public int getTelf() {
+        return telf;
     }
 
     public String getCategoria() {
@@ -51,6 +49,10 @@ public class DatosServicio implements Serializable {
         return dni;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public String getDireccion() {
         return direccion;
     }
@@ -63,8 +65,8 @@ public class DatosServicio implements Serializable {
         this.activo = activo;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setTelf(int telf) {
+        this.telf = telf;
     }
 
     public void setCategoria(String categoria) {
@@ -77,6 +79,10 @@ public class DatosServicio implements Serializable {
 
     public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setDireccion(String direccion) {
@@ -92,10 +98,11 @@ public class DatosServicio implements Serializable {
         JSONObject job = new JSONObject();
         try {
             job.put("activo", serv.isActivo());
-            job.put("telefono", serv.getTelefono());
+            job.put("telf", serv.getTelf());
             job.put("categoria", serv.getCategoria());
             job.put("fecha", serv.getFecha());
             job.put("dni", serv.getDni());
+            job.put("nombre", serv.getNombre());
             job.put("direccion", serv.getDireccion());
             job.put("puntuacion", serv.getPuntuacion());
         } catch (JSONException ex) {
@@ -108,10 +115,11 @@ public class DatosServicio implements Serializable {
         DatosServicio serv = null;
         try {
             serv = new DatosServicio(job.getBoolean("activo"),
-                    job.getInt("telefono"),
+                    job.getInt("telf"),
                     job.getString("categoria"),
                     job.getString("fecha"),
                     job.getInt("dni"),
+                    job.getString("nombre"),
                     job.getString("direccion"),
                     job.getDouble("puntuacion"));
         } catch (JSONException ex) {
@@ -121,14 +129,14 @@ public class DatosServicio implements Serializable {
     }
 
     public String[] toString(DatosServicio serv){
-        String[] servicio = {""+serv.isActivo(),""+serv.getTelefono(),""+serv.getCategoria(),""+
-                serv.getFecha(),""+serv.getDni(),""+serv.getDireccion(),""+serv.getPuntuacion()};
+        String[] servicio = {""+serv.isActivo(),""+serv.getTelf(),""+serv.getCategoria(),""+
+                serv.getFecha(),""+serv.getDni(),""+serv.getNombre(),""+serv.getDireccion(),""+serv.getPuntuacion()};
         return servicio;
     }
 
     public DatosServicio fromString (String[] serv){
         DatosServicio servicio = new DatosServicio(Boolean.parseBoolean(serv[0]),Integer.parseInt(serv[1]),
-                serv[2],serv[3],Integer.parseInt(serv[4]),serv[5],Double.parseDouble(serv[6]));
+                serv[2],serv[3],Integer.parseInt(serv[4]),serv[5],serv[6],Double.parseDouble(serv[7]));
         return servicio;
     }
 }

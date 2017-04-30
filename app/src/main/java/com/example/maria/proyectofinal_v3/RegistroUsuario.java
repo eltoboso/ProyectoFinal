@@ -11,81 +11,69 @@ import android.widget.Toast;
 
 import javabean.DatosServicio;
 import javabean.DatosUsuario;
+import modelo.GestionComs;
 
 public class RegistroUsuario extends AppCompatActivity {
 
-    //private GestionComs comunicacion;
+    private GestionComs comunicacion;
     private DatosUsuario usuario;
     private DatosServicio servicio;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
-
-
+        comunicacion = new GestionComs();
     }
 
     //Ejecutamos el botón registrar
-
     public void registrar(View v) {
-/*
-        //Recogemos los datos de los editText
+
+        //recogemos los datos de los editText
         EditText edtNombre = (EditText) this.findViewById(R.id.edtNombre);
         EditText edtEmail = (EditText) this.findViewById(R.id.edtEmail);
 
-        //Obtenemos el telefono del terminal
+        //obtenemos el número de teléfono del terminal
         TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
 
-        //Montamos un javabean para enviarlo a la tarea asíncrona
+        //montamos un javabean que pasaremos como primer parámetro a la tarea asíncrona
         usuario = new DatosUsuario(edtNombre.getText().toString(),
                 (int) Long.parseLong(tm.getLine1Number()),
                 edtEmail.getText().toString());
 
-        //Creamos javabean DatosServicio
-        //dni=0 y puntuacion=0 ->requisitos para registro o modificación en el servidor
+        // creamos javabean DatosServicio con dni=0 y puntuacion=0
+        // para que el servidor lo reconozca como petición de registro o modificación
+        servicio = new DatosServicio(true, (int) Long.parseLong(tm.getLine1Number()), "categoria", "fecha", 0, "nombre","direccion", 0);
 
-        servicio = new DatosServicio(true, (int) Long.parseLong(tm.getLine1Number()), "categoria", "fecha", 0, "direccion", 0);
+        // creamos objeto AsyncTask para que la comunicación con el servidor no bloquee el hilo principal
+        ComunicacionTask com = new ComunicacionTask();
 
-        //Creo un objeto de la subclase de AsyncTask
+        // pasamos a la tarea asíncrona los javabeans: usuario y servicio
+        // que enviaremos al servidor con el objeto GestionComs
+        com.execute(usuario, servicio);
 
-        /*
-        ComunicacionTask com=new ComunicacionTask();
+        // mostramos mensaje
+        Toast.makeText(this, "Datos registrados", Toast.LENGTH_LONG).show();
 
-        //Pasamos a la tarea asincrona los javabeans: usuario y servicio
-        //com.execute(usuario, servicio);
-        com.execute();
-
-*/
-        //lanzamos la actividad MenuUsuario
-
-        //Creo objeto intent
+        // lanzamos la actividad MenuUsuario
+        // creamos objeto intent
         Intent intent = new Intent(this, MenuUsuario.class);
-/*
-        //Guardo los javabeans en el intent
+
+        // guardamos los javabeans en el intent
         intent.putExtra("user", usuario);
         intent.putExtra("serv", servicio);
-*/
-        startActivity(intent);
 
-
+        this.startActivity(intent);
     }
-}
-/*
-    //En la prueba el primer parámetro es void
-    //Según el execute, CAMBIAR
 
-    class ComunicacionTask extends AsyncTask <Void, Void, Void> {
+    private class ComunicacionTask extends AsyncTask <Object, Void, Void> {
+        //El método doInBackground recibe dos parámetros Objeto: DatosUsuario y DatosServicio
         @Override
-
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Object... params) {
+            comunicacion.enviarDatosUsServ((DatosUsuario) params[0], (DatosServicio) params[1]);
             return null;
         }
-
-        //El primer parámetro va al doInBackground: recibo un objeto datos usuario
-
+    }
 
         /*
         @Override
@@ -124,5 +112,5 @@ public class RegistroUsuario extends AppCompatActivity {
             //Toast.makeText(RegistroUsuario.this, "Usuario registrado", Toast.LENGTH_LONG).show();
         }
     }
-
-}*/
+*/
+}
