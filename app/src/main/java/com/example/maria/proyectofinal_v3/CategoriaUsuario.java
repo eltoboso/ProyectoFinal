@@ -36,7 +36,7 @@ public class CategoriaUsuario extends AppCompatActivity {
         comunicacion = new GestionComs();
         ComunicacionTask com = new ComunicacionTask();
 
-        // los datos fecha y dirección se recogen de los campos que rellene el usuario
+        // los datos fecha y dirección se recogen de los campos que rellene el usuario  ->>> PENDIENTE DE HACER
         servicio = new DatosServicio(true,usuario.getTelefono(),categoria,"30/04/2017",0,"nombre","direccion",0);
 
         // pasamos a la tarea asíncrona los javabeans: usuario y servicio
