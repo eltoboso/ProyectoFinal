@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class Ayudante extends SQLiteOpenHelper{
+public class AyudanteAux extends SQLiteOpenHelper{
 
-    public Ayudante(Context ctx, String nombre){
+    public AyudanteAux(Context ctx, String nombre){
         super(ctx,nombre,null,1);
     }
 
@@ -16,17 +16,12 @@ public class Ayudante extends SQLiteOpenHelper{
 
         //montamos la instrucción SQL de creación de la tabla
 
-        String sqlCreaTabla="create table historial_usuario (";
-        sqlCreaTabla+="_id integer primary key autoincrement,";
-        sqlCreaTabla+="activo, boolean,";
-        sqlCreaTabla+="servicio text,";
-        sqlCreaTabla+="dni int,";
-        sqlCreaTabla+="nombre text,";
-        sqlCreaTabla+="fecha text,";
-        sqlCreaTabla+="puntuacion int)";
+        String sqlCreaTablaAux="create table config_perfil (";
+        sqlCreaTablaAux+="_id integer primary key autoincrement,";
+        sqlCreaTablaAux+="usuario boolean)";
 
         //ejecutamos la instrucción
-        db.execSQL(sqlCreaTabla);
+        db.execSQL(sqlCreaTablaAux);
     }
 
     @Override

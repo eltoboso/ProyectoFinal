@@ -21,7 +21,6 @@ public class RegistroProfesional extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_profesional);
         comunicacion = new GestionComs();
-
     }
 
     //Programamos la respuesta al botón
@@ -68,6 +67,7 @@ public class RegistroProfesional extends AppCompatActivity {
         //creamos objeto intent
         Intent intent = new Intent(this, MenuProfesional.class);
 
+        //guardamos el javabean en el intent
         intent.putExtra("profesional", pro);
 
         //lanzamos la Actividad MenuProfesional

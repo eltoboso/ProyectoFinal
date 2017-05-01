@@ -39,6 +39,13 @@
                 android:layout_weight="1"
                 android:onClick="profesional"
                 android:text="PROFESIONAL" />
+
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recordar mi decisión" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

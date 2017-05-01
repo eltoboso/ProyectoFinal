@@ -18,7 +18,6 @@ public class DatosServicio implements Serializable {
     public DatosServicio(boolean activo, int telf, String categoria,
                          String fecha, int dni, String nombre,
                          String direccion, double puntuacion) {
-        super();
         this.activo = activo;
         this.telf = telf;
         this.categoria = categoria;
@@ -128,7 +127,12 @@ public class DatosServicio implements Serializable {
         return serv;
     }
 
-    public String[] toString(DatosServicio serv){
+    public String toString(){
+        return this.isActivo()+"/"+this.getTelf()+"/"+this.getCategoria()+"/"+
+                this.getFecha()+"/"+this.getDni()+"/"+this.getNombre()+"/"+this.getDireccion()+"/"+this.getPuntuacion();
+    }
+
+/*    public String[] toString(DatosServicio serv){
         String[] servicio = {""+serv.isActivo(),""+serv.getTelf(),""+serv.getCategoria(),""+
                 serv.getFecha(),""+serv.getDni(),""+serv.getNombre(),""+serv.getDireccion(),""+serv.getPuntuacion()};
         return servicio;
@@ -139,5 +143,6 @@ public class DatosServicio implements Serializable {
                 serv[2],serv[3],Integer.parseInt(serv[4]),serv[5],serv[6],Double.parseDouble(serv[7]));
         return servicio;
     }
+    */
 }
 

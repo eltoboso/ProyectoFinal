@@ -55,13 +55,14 @@ public class RegistroUsuario extends AppCompatActivity {
         // mostramos mensaje
         Toast.makeText(this, "Datos registrados", Toast.LENGTH_LONG).show();
 
+        /////////////// hay que meter en BBDD guardarPerfil
+
         // lanzamos la actividad MenuUsuario
         // creamos objeto intent
         Intent intent = new Intent(this, MenuUsuario.class);
 
         // guardamos los javabeans en el intent
         intent.putExtra("user", usuario);
-        intent.putExtra("serv", servicio);
 
         this.startActivity(intent);
     }
