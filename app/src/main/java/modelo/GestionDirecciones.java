@@ -26,7 +26,7 @@ public class GestionDirecciones {
         List<Address> lista = null;
         try {
             // pasamos parámetro formateado al método para que nos devuelva geolocalización
-            lista = geo.getFromLocationName(direccion, 2);
+            lista = geo.getFromLocationName(direccion, 1);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

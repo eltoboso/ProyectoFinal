@@ -19,5 +19,11 @@
             android:layout_height="wrap_content"
             android:onClick="verServicios"
             android:text="MIS SERVICIOS" />
+
+        <ListView
+            android:id="@+id/lvServicios"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

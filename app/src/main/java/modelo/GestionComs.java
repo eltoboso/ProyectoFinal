@@ -19,7 +19,7 @@ public class GestionComs {
     private DatosServicio serv;
     private DatosUsuario user;
 
-    // envío de javabeans DatosUsuario y DatosServicio al servidor -> sin respuesta
+// envío de javabeans DatosUsuario y DatosServicio al servidor -> sin respuesta
     public void enviarDatosUsServ(DatosUsuario user, DatosServicio serv) {
         try {
             Socket sc = new Socket("192.168.1.129", 8000);
@@ -40,13 +40,16 @@ public class GestionComs {
         ArrayList<DatosServicio> profesionales = new ArrayList<>();
         try {
             //  enviamos javabeans al servidor como JSON
-            Socket sc = new Socket("192.168.1.129", 8000);
+            Socket sc = new Socket("192.168.1.129", 6000);
             PrintStream salida = new PrintStream(sc.getOutputStream());
             JSONObject solicita = toJSONObject(user, serv);
             salida.println(solicita);
 
             BufferedReader bf = new BufferedReader(new InputStreamReader(sc.getInputStream()));
-            if (bf.readLine() != null) {
+            if (serv.getDni()!=0) {
+            //  si el dni enviado no es 0, estamos solicitando un profesional en particular
+            //  no recibimos respuesta
+            }else if (bf.readLine() != null) {
             ////  recibimos arrayJSON, lo recorremos creando un javabean DatosServicio por cada objetoJSON
                 JSONArray jsonArray = new JSONArray(bf.readLine());
                 for (int i = 0; i < jsonArray.length(); i++) {

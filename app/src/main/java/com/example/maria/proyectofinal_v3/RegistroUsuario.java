@@ -43,7 +43,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
         // creamos javabean DatosServicio con dni=0 y puntuacion=0
         // para que el servidor lo reconozca como petición de registro o modificación
-        servicio = new DatosServicio(true, (int) Long.parseLong(tm.getLine1Number()), "categoria", "fecha", 0, "nombre","direccion", 0);
+        servicio = new DatosServicio(true, (int) Long.parseLong(tm.getLine1Number()), "categoria", "fecha", 0, "nombre", "direccion", 0);
 
         // creamos objeto AsyncTask para que la comunicación con el servidor no bloquee el hilo principal
         ComunicacionTask com = new ComunicacionTask();
@@ -67,7 +67,7 @@ public class RegistroUsuario extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    private class ComunicacionTask extends AsyncTask <Object, Void, Void> {
+    private class ComunicacionTask extends AsyncTask<Object, Void, Void> {
         //El método doInBackground recibe dos parámetros Objeto: DatosUsuario y DatosServicio
         @Override
         protected Void doInBackground(Object... params) {
@@ -75,43 +75,4 @@ public class RegistroUsuario extends AppCompatActivity {
             return null;
         }
     }
-
-        /*
-        @Override
-        protected Void doInBackground(String... params) {
-
-            /*
-            usuario=(DatosUsuario) params[0];
-            servicio=(DatosServicio)params[1];
-
-            //Creo el objeto comunicación
-            comunicacion= new GestionComs();
-
-            //Enviamos el registro del usuario al servidor
-
-            comunicacion.enviarDatosUsuario(usuario.getNombre(),
-                    Integer.parseInt(String.valueOf(usuario.getTelefono())),
-                    usuario.getEmail());
-
-            //Enviamos el registro (inicial) del servicio al servidor
-
-            comunicacion.enviarDatosServicio(servicio);
-
-
-            return null;
-        }
-        */
-
-/*
-
-        //El tercer parámetro va al postExecute
-
-        @Override
-        protected void onPostExecute(Void Void) {
-
-            //Sacamos un toast: Usuario registrado al realizar la tarea
-            //Toast.makeText(RegistroUsuario.this, "Usuario registrado", Toast.LENGTH_LONG).show();
-        }
-    }
-*/
 }
